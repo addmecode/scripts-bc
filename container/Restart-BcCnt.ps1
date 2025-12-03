@@ -1,0 +1,1 @@
+﻿Restart-BcContainer -containerName "cnt-name"
