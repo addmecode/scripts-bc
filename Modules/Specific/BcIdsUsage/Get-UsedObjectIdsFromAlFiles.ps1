@@ -4,8 +4,6 @@ function Get-UsedObjectIdsFromAlFiles {
         [Parameter(Mandatory)]
         [string]$ProjectPath
     )
-    $SHARED_MODULES_PATH = Join-Path -Path $PSScriptRoot -ChildPath "../../Shared" -Resolve
-    Import-Module -Name $(Join-Path -Path $SHARED_MODULES_PATH -ChildPath "BcFiles/Get-ObjectTypes.psm1" -Resolve) -Force
     $objectTypes = Get-ObjectTypes
 
     # HashSet per object type

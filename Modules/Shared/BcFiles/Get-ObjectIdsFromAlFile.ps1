@@ -4,8 +4,6 @@ function Get-ObjectIdsFromAlFile {
         [Parameter(Mandatory)]
         [string]$AlFilePath
     )
-    $SHARED_MODULES_PATH = Join-Path -Path $PSScriptRoot -ChildPath "../" -Resolve
-    Import-Module -Name $(Join-Path -Path $SHARED_MODULES_PATH -ChildPath "BcFiles/Get-ObjectTypes.psm1" -Resolve) -Force
     $objectTypes = Get-ObjectTypes
     # Regex: matches object declarations at line start, skips // comment lines
     # Match examples:
