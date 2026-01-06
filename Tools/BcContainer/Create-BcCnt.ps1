@@ -1,17 +1,17 @@
-$containerName = "cnt-name"
-$securePassword = ConvertTo-SecureString -String $password -AsPlainText -Force
-$credential = New-Object pscredential 'admin', $securePassword
-$password = 'P@ssw0rd'
-$artifactUrl = Get-BcArtifactUrl -type 'Sandbox' -country 'us' -select 'Latest' -version "27"
-$setDns = $true
+$CONTAINER_NAME = "cnt-name"
+$SECURE_PASSWORD = ConvertTo-SecureString -String $PASSWORD -AsPlainText -Force
+$CREDENTIAL = New-Object pscredential 'admin', $SECURE_PASSWORD
+$PASSWORD = 'P@ssw0rd'
+$ARTIFACT_URL = Get-BcArtifactUrl -type 'Sandbox' -country 'us' -select 'Latest' -version "27"
+$SET_DNS = $true
 
 
-$parameters = @{
+$PARAMETERS = @{
     accept_eula              = $true
-    containerName            = $containerName
-    credential               = $credential
+    containerName            = $CONTAINER_NAME
+    credential               = $CREDENTIAL
     auth                     = 'UserPassword'
-    artifactUrl              = $artifactUrl
+    artifactUrl              = $ARTIFACT_URL
     multitenant              = $false
     assignPremiumPlan        = $true
     includeAL                = $true
@@ -19,6 +19,6 @@ $parameters = @{
     updateHosts              = $true
 }
 
-if ($setDns) { $parameters.dns = "8.8.8.8" }
+if ($SET_DNS) { $PARAMETERS.dns = "8.8.8.8" }
 
-New-BcContainer @parameters
+New-BcContainer @PARAMETERS

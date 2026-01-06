@@ -1,13 +1,13 @@
-$codexHome = Join-Path $HOME ".codex"
-$rulesDir = "C:\Users\adrri\Desktop\Projects\bc-public-repos\alguidelines\content\docs\agentic-coding\vibe-coding-rules"
-$outFile = Join-Path $codexHome "AGENTS.md"
+$CODEX_HOME = Join-Path $HOME ".codex"
+$RULES_DIR = "C:\Users\adrri\Desktop\Projects\bc-public-repos\alguidelines\content\docs\agentic-coding\vibe-coding-rules"
+$OUT_FILE = Join-Path $CODEX_HOME "AGENTS.md"
 
-$excludeNames = @(
+$EXCLUDE_NAMES = @(
     "README.md",
     "_index.md"
 )
-if (-not (Test-Path $rulesDir)) {
-    throw "rulesDir not found: $rulesDir"
+if (-not (Test-Path $RULES_DIR)) {
+    throw "rulesDir not found: $RULES_DIR"
 }
 
 @"
@@ -28,21 +28,21 @@ If NONE of the conditions are true:
 ---
 
 # AL RULES
-"@ | Set-Content $outFile
+"@ | Set-Content $OUT_FILE
 
-$files = Get-ChildItem -Path $rulesDir -File -Filter "*.md" | Where-Object {
-    if ($excludeNames -contains $($_.Name)) { return $false }
+$FILES = Get-ChildItem -Path $RULES_DIR -File -Filter "*.md" | Where-Object {
+    if ($EXCLUDE_NAMES -contains $($_.Name)) { return $false }
     return $true
 } | Sort-Object Name
 
-if ($files.Count -eq 0) {
-    Write-Warning "No files to merge in: $rulesDir"
+if ($FILES.Count -eq 0) {
+    Write-Warning "No files to merge in: $RULES_DIR"
     exit 0
 }
 
-foreach ($f in $files) {
-    "`n---`n# Source: $($f.Name)`n---`n" | Add-Content $outFile
-    Get-Content -Path $f.FullName | Add-Content $outFile
+foreach ($f in $FILES) {
+    "`n---`n# Source: $($f.Name)`n---`n" | Add-Content $OUT_FILE
+    Get-Content -Path $f.FullName | Add-Content $OUT_FILE
 }
 
-Write-Host "OK: Merged $($files.Count) file(s) into $outFile"
+Write-Host "OK: Merged $($FILES.Count) file(s) into $OUT_FILE"
